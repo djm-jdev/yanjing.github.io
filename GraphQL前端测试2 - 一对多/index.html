@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>一对多 - GraphQL Doc</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u4e00\u5bf9\u591a";
+    var mkdocs_page_input_path = "GraphQL\u524d\u7aef\u6d4b\u8bd52 - \u4e00\u5bf9\u591a.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> GraphQL Doc</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../GraphQL前端测试1 - 初步了解/">初步了解</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">一对多</a>
+    <ul class="subnav">
+            
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../GraphQL前端测试3 - 一对一/">一对一</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../GraphQL前端测试4 - JavaScript 客户端/">JavaScript客户端</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">GraphQL Doc</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>一对多</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>本小节哦们将会对 选手信息player和选手比赛记录信息palyrecord 进行一对多的关联查询。</p>
+<p>选手表 Players  </p>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="center">名</th>
+<th align="center">类型</th>
+<th align="center">解释</th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center">Id</td>
+<td align="center">int</td>
+<td align="center">自增ID</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">Name</td>
+<td align="center">nvarchar(MAX)</td>
+<td align="center">姓名</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">BirthDate</td>
+<td align="center">datetime2</td>
+<td align="center">生日</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">BirthPlace</td>
+<td align="center">nvarchar(MAX)</td>
+<td align="center">出生地</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">Height</td>
+<td align="center">nvarchar(MAX)</td>
+<td align="center">身高</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">WeightLbs</td>
+<td align="center">int</td>
+<td align="center">体重</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p>选手比赛记录表  PlayRecords</p>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="center">名</th>
+<th align="center">类型</th>
+<th align="center">解释</th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center">Id</td>
+<td align="center">int</td>
+<td align="center">自增ID</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">PlayerId</td>
+<td align="center">int</td>
+<td align="center">选手ID</td>
+<td align="left">Players的关联键</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">YearName</td>
+<td align="center">int</td>
+<td align="center">年份</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">CityName</td>
+<td align="center">nvarchar(MAX)</td>
+<td align="center">城市</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">Scores</td>
+<td align="center">int</td>
+<td align="center">得分</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p>【选手表 Players】 中一条记录可能会有0到多条的 【选手比赛记录表  PlayRecords】表记录，
+PlayRecords.PlayerId 就是两个表的关联键</p>
+<p>打开测试工具：<a href="http://114.116.100.206:5006/GraphQL/">http://114.116.100.206:5006/GraphQL/</a></p>
+<p>1、查询 id = 5 的选手信息</p>
+<pre><code>query{
+  player(id:5){
+    id,
+    name,
+    birthDate,
+    birthPlace,
+    height,
+    weightLbs
+  }
+}
+</code></pre>
+
+<p>返回数据</p>
+<pre><code>{
+  &quot;data&quot;: {
+    &quot;player&quot;: {
+      &quot;id&quot;: 5,
+      &quot;name&quot;: &quot;Patrik Laine&quot;,
+      &quot;birthDate&quot;: &quot;1998/4/19&quot;,
+      &quot;birthPlace&quot;: &quot;Tampere, Finland&quot;,
+      &quot;height&quot;: &quot;6'04&quot;,
+      &quot;weightLbs&quot;: 206
+    }
+  }
+}
+</code></pre>
+
+<p>2、查询 id = 5 的选手信息，以及选手的比赛记录</p>
+<pre><code>query{
+  player(id:5){
+    id,
+    name,
+    birthDate,
+    birthPlace,
+    height,
+    weightLbs,
+    records{
+      yearName,
+      cityName,
+      scores
+    }
+  }
+}
+</code></pre>
+
+<p>返回数据</p>
+<pre><code>{
+  &quot;data&quot;: {
+    &quot;player&quot;: {
+      &quot;id&quot;: 5,
+      &quot;name&quot;: &quot;Patrik Laine&quot;,
+      &quot;birthDate&quot;: &quot;1998/4/19&quot;,
+      &quot;birthPlace&quot;: &quot;Tampere, Finland&quot;,
+      &quot;height&quot;: &quot;6'04&quot;,
+      &quot;weightLbs&quot;: 206,
+      &quot;records&quot;: [
+        {
+          &quot;yearName&quot;: 2003,
+          &quot;cityName&quot;: &quot;Vancouver&quot;,
+          &quot;scores&quot;: 909
+        },
+        {
+          &quot;yearName&quot;: 2002,
+          &quot;cityName&quot;: &quot;Tahiti&quot;,
+          &quot;scores&quot;: 156
+        },
+        {
+          &quot;yearName&quot;: 2001,
+          &quot;cityName&quot;: &quot;Seoul&quot;,
+          &quot;scores&quot;: 141
+        },
+        {
+          &quot;yearName&quot;: 2000,
+          &quot;cityName&quot;: &quot;Sydney&quot;,
+          &quot;scores&quot;: 350
+        }
+      ]
+    }
+  }
+}
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../GraphQL前端测试3 - 一对一/" class="btn btn-neutral float-right" title="一对一">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../GraphQL前端测试1 - 初步了解/" class="btn btn-neutral" title="初步了解"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../GraphQL前端测试1 - 初步了解/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../GraphQL前端测试3 - 一对一/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

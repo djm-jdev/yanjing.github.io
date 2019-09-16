@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>一对一 - GraphQL Doc</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u4e00\u5bf9\u4e00";
+    var mkdocs_page_input_path = "GraphQL\u524d\u7aef\u6d4b\u8bd53 - \u4e00\u5bf9\u4e00.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> GraphQL Doc</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../GraphQL前端测试1 - 初步了解/">初步了解</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../GraphQL前端测试2 - 一对多/">一对多</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">一对一</a>
+    <ul class="subnav">
+            
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../GraphQL前端测试4 - JavaScript 客户端/">JavaScript客户端</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">GraphQL Doc</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>一对一</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>测试地址：<a href="http://114.116.100.206:5006/GraphQL/">http://114.116.100.206:5006/GraphQL/</a></p>
+<p>假设有两个对象，一个是照片，另外一个是用户。
+照片是由用户发布的，每个照片都对应一个用户。</p>
+<p>用户表 Users</p>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="center">名</th>
+<th align="center">类型</th>
+<th align="center">解释</th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center">Id</td>
+<td align="center">int</td>
+<td align="center">自增ID</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">Name</td>
+<td align="center">nvarchar(MAX)</td>
+<td align="center">姓名</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">Avatar</td>
+<td align="center">nvarchar(MAX)</td>
+<td align="center">头像</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p>照片表 Photos  </p>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="center">名</th>
+<th align="center">类型</th>
+<th align="center">解释</th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center">Id</td>
+<td align="center">int</td>
+<td align="center">自增ID</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">Name</td>
+<td align="center">nvarchar(MAX)</td>
+<td align="center">姓名</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">Url</td>
+<td align="center">nvarchar(MAX)</td>
+<td align="center">地址</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">Description</td>
+<td align="center">nvarchar(MAX)</td>
+<td align="center">描述</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">created</td>
+<td align="center">datetime2</td>
+<td align="center">创建日期</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">postedBy_UserId</td>
+<td align="center">int</td>
+<td align="center">发布人</td>
+<td align="left">关联字段 （1对1）</td>
+</tr>
+</tbody>
+</table>
+<p>关系型数据库中定义的结构和前台需要的结构还是有区别的，下面定义了需要的 Schema</p>
+<pre><code>type XUser
+{
+  id:ID!
+  name:String
+  avatar:String
+}
+type XPhoto
+{
+  id:ID!
+  name:String!
+  url:String!
+  description:String!
+  created:DateTime!
+  postedBy:User!
+}
+</code></pre>
+
+<p>测试用例，输入如下信息获取照片信息及发布人的信息</p>
+<pre><code>query{
+  photo(id:5){
+    id,
+    name,
+    url,
+    postedBy {
+      name,
+      avatar
+    }
+  }
+}
+</code></pre>
+
+<p>返回信息</p>
+<pre><code>{
+  &quot;data&quot;: {
+    &quot;photo&quot;: {
+      &quot;id&quot;: 5,
+      &quot;name&quot;: &quot;summer morning&quot;,
+      &quot;url&quot;: &quot;http://demo.com/summer_morning.html&quot;,
+      &quot;postedBy&quot;: {
+        &quot;name&quot;: &quot;Bill&quot;,
+        &quot;avatar&quot;: &quot;http://picture.com/bill.jpg&quot;
+      }
+    }
+  }
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../GraphQL前端测试4 - JavaScript 客户端/" class="btn btn-neutral float-right" title="JavaScript客户端">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../GraphQL前端测试2 - 一对多/" class="btn btn-neutral" title="一对多"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../GraphQL前端测试2 - 一对多/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../GraphQL前端测试4 - JavaScript 客户端/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

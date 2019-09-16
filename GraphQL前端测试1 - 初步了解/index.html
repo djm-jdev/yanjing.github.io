@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>初步了解 - GraphQL Doc</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u521d\u6b65\u4e86\u89e3";
+    var mkdocs_page_input_path = "GraphQL\u524d\u7aef\u6d4b\u8bd51 - \u521d\u6b65\u4e86\u89e3.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> GraphQL Doc</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">初步了解</a>
+    <ul class="subnav">
+            
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../GraphQL前端测试2 - 一对多/">一对多</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../GraphQL前端测试3 - 一对一/">一对一</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../GraphQL前端测试4 - JavaScript 客户端/">JavaScript客户端</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">GraphQL Doc</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>初步了解</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>GraphQL  一种用于 API 的查询语言</p>
+<p>GraphQL 既是一种用于 API 的查询语言也是一个满足你数据查询的运行时。 GraphQL 对你的 API 中的数据提供了一套易于理解的完整描述，使得客户端能够准确地获得它需要的数据，而且没有任何冗余，也让 API 更容易地随着时间推移而演进，还能用于构建强大的开发者工具。</p>
+<p>更多详情：<br />
+<a href="https://baijiahao.baidu.com/s?id=1630520034094905472">https://baijiahao.baidu.com/s?id=1630520034094905472</a><br />
+<a href="https://graphql.cn">https://graphql.cn</a></p>
+<p>一、准备数据</p>
+<p>测试数据结构 Player  </p>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="center">名</th>
+<th align="center">类型</th>
+<th align="center">解释</th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center">Id</td>
+<td align="center">int</td>
+<td align="center">自增ID</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">Name</td>
+<td align="center">nvarchar(MAX)</td>
+<td align="center">姓名</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">BirthDate</td>
+<td align="center">datetime2</td>
+<td align="center">生日</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">BirthPlace</td>
+<td align="center">nvarchar(MAX)</td>
+<td align="center">出生地</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">Height</td>
+<td align="center">nvarchar(MAX)</td>
+<td align="center">身高</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">WeightLbs</td>
+<td align="center">int</td>
+<td align="center">体重</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="left">Id</th>
+<th align="center">Name</th>
+<th align="center">BirthDate</th>
+<th align="center">BirthPlace</th>
+<th align="center">Height</th>
+<th align="center">WeightLbs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">11</td>
+<td align="center">Sidney Crosby</td>
+<td align="center">1987-08-07 00:00:00.0000000</td>
+<td align="center">Cole Harbour, NS</td>
+<td align="center">5'11</td>
+<td align="center">200</td>
+</tr>
+<tr>
+<td align="left">12</td>
+<td align="center">Connor McDavid</td>
+<td align="center">1997-01-13 00:00:00.0000000</td>
+<td align="center">Richmond Hill, ONT</td>
+<td align="center">6'01</td>
+<td align="center">192</td>
+</tr>
+<tr>
+<td align="left">13</td>
+<td align="center">Alex Ovechkin</td>
+<td align="center">1985-01-13 00:00:00.0000000</td>
+<td align="center">Moscow, Russia</td>
+<td align="center">6'03</td>
+<td align="center">235</td>
+</tr>
+<tr>
+<td align="left">14</td>
+<td align="center">Nico Hischier</td>
+<td align="center">1999-01-04 00:00:00.0000000</td>
+<td align="center">Brig, Switzerland</td>
+<td align="center">6'01</td>
+<td align="center">175</td>
+</tr>
+<tr>
+<td align="left">15</td>
+<td align="center">Patrik Laine</td>
+<td align="center">1998-04-19 00:00:00.0000000</td>
+<td align="center">Tampere, Finland</td>
+<td align="center">6'04</td>
+<td align="center">206</td>
+</tr>
+<tr>
+<td align="left">16</td>
+<td align="center">Auston Matthews</td>
+<td align="center">1997-09-17 00:00:00.0000000</td>
+<td align="center">San Ramon, CA</td>
+<td align="center">6'03</td>
+<td align="center">216</td>
+</tr>
+</tbody>
+</table>
+<p>二、测试接口
+测试地址：<a href="http://114.116.100.206:5006/GraphQL/">http://114.116.100.206:5006/GraphQL/</a></p>
+<p>打开上面的网址，开启的是一个GraphQL 测试工具 ： GraphiQL ，方便开发人员进行测试。当然你可以使用postman,最新版本的postman已经支持GraphQL的调试</p>
+<p>1、接口1 查询一个选手，接口名称 player ,输入参数id</p>
+<pre><code>query{
+  player(id:11)
+  {
+    id,
+    name
+  }
+}
+</code></pre>
+
+<p>返回结果</p>
+<pre><code>{
+  &quot;data&quot;: {
+    &quot;player&quot;: {
+      &quot;id&quot;: 11,
+      &quot;name&quot;: &quot;Alex Ovechkin&quot;
+    }
+  }
+}
+</code></pre>
+
+<p>2、接口2 随机获得一个选手信息，接口名称 random</p>
+<pre><code>query{
+  random
+  {
+    id,
+    name,
+    birthPlace
+  }
+}
+</code></pre>
+
+<p>返回结果</p>
+<pre><code>{
+  &quot;data&quot;: {
+    &quot;random&quot;: {
+      &quot;id&quot;: 12,
+      &quot;name&quot;: &quot;Nico Hischier&quot;,
+      &quot;birthPlace&quot;: &quot;Brig, Switzerland&quot;
+    }
+  }
+}
+</code></pre>
+
+<p>3、接口3 查询所有选手信息，接口名称 all</p>
+<pre><code>query{
+  all
+  {
+    id,
+    name,
+    birthDate,
+    birthPlace
+  }
+}
+</code></pre>
+
+<p>返回结果</p>
+<pre><code>{
+  &quot;data&quot;: {
+    &quot;all&quot;: [
+      {
+        &quot;id&quot;: 9,
+        &quot;name&quot;: &quot;Sidney Crosby&quot;,
+        &quot;birthDate&quot;: &quot;1987/8/7&quot;,
+        &quot;birthPlace&quot;: &quot;Cole Harbour, NS&quot;
+      },
+      {
+        &quot;id&quot;: 10,
+        &quot;name&quot;: &quot;Connor McDavid&quot;,
+        &quot;birthDate&quot;: &quot;1997/1/13&quot;,
+        &quot;birthPlace&quot;: &quot;Richmond Hill, ONT&quot;
+      }
+    ]
+  }
+}
+</code></pre>
+
+<p>以上示例中字段信息可以根据实际需要进行增加和删除</p>
+<p>三、解释</p>
+<p>要执行查询，需要有一个根查询对象（query）。查询应该只获取数据，而不应该修改数据。</p>
+<pre><code>query {
+  player{
+    id
+    name
+  }
+}
+</code></pre>
+
+<p>如果后台只有一个查询对象，可以采用简化的语法</p>
+<pre><code>player{
+    id
+    name
+  }
+</code></pre>
+
+<p>如果需要输入参数，需要写成 (id:12) ，标识 ID = 12 的过滤条件</p>
+<pre><code>player(id:12){
+    id
+    name
+</code></pre>
+
+<p>}</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../GraphQL前端测试2 - 一对多/" class="btn btn-neutral float-right" title="一对多">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../GraphQL前端测试2 - 一对多/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
