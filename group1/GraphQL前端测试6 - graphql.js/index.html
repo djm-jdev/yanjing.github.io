@@ -168,6 +168,7 @@
 &lt;/html&gt;
 </code></pre>
 
+<p>如果采用 <code>graph.query</code>声明方法，输入的查询语句中就可以去掉 <code>query { ... }</code>格式。</p>
 <p>例子2、增加一个选手信息</p>
 <pre><code>&lt;html&gt;
   &lt;head&gt;
@@ -199,6 +200,54 @@
 
   &lt;/body&gt;
 &lt;/html&gt; 
+</code></pre>
+
+<p>还有一种类似的写法</p>
+<pre><code>&lt;html&gt;
+  &lt;head&gt;
+    &lt;script src=&quot;../graphql.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+
+      var graph = graphql(&quot;http://114.116.100.206:5006/GraphQL&quot;, {
+        alwaysAutodeclare: true,
+        asJSON: true,
+        debug: true
+      })
+
+      var createPlayer = graph.mutate(`
+        createPlayer(player: $player) { id,name }
+      `);
+
+      createPlayer({
+        &quot;player!PlayerInput&quot;: { &quot;name&quot;:&quot;jim&quot;,&quot;birthPlace&quot;:&quot;Beijing&quot; }
+      }).then(function (response) {
+        document.write(JSON.stringify(response.createPlayer));
+        console.log(response);
+      })
+
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+
+  &lt;/body&gt;
+&lt;/html&gt; 
+</code></pre>
+
+<p>后一种写法中<code>alwaysAutodeclare: true</code> 是没有注释掉的，也就是没有必要在语句中增加 <code>(@autodeclare) {...}</code>格式</p>
+<p>注意 <code>player!PlayerInput</code> ，其中 <code>PlayerInput</code>是服务端声明的Schema名称</p>
+<p>下面是后台C#代码，其中定义的Schema 中设置了 输入模型的名称 <code>PlayerInput</code>,前台也需要声明一下。在使用Graphiql的情况下，客户端编写人员可以很容易的在Graphiql docs 中看到。</p>
+<pre><code class="C#">public class PlayerInputType : InputObjectGraphType
+    {
+        public PlayerInputType()
+        {
+            Name = &quot;PlayerInput&quot;;
+            Field&lt;NonNullGraphType&lt;StringGraphType&gt;&gt;(&quot;name&quot;);
+            Field&lt;StringGraphType&gt;(&quot;birthPlace&quot;);
+            Field&lt;StringGraphType&gt;(&quot;height&quot;);
+            Field&lt;IntGraphType&gt;(&quot;weightLbs&quot;);
+            Field&lt;DateGraphType&gt;(&quot;birthDate&quot;);
+        }
+    }
 </code></pre>
               
             </div>
